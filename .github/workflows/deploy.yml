@@ -20,26 +20,32 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-          
+          node-version: "18"
+          cache: "npm"
+
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Build
         run: npm run build
-        
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v4 # Mise à jour vers v4
         with:
-          path: './dist'  # Ajustez ce chemin selon votre projet (build, dist, out, etc.)
+          name: github-pages
+          path: "./dist" # Ajustez ce chemin selon votre projet (build, dist, out, etc.)
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3 # Assurez-vous d'utiliser la dernière version
+        with:
+          path: "./dist" # Ajustez ce chemin selon votre projet
 
   deploy:
     environment:
@@ -50,4 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4 # Mise à jour vers v4
