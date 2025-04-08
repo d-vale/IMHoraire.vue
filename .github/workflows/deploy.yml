@@ -21,26 +21,43 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: List files after checkout
+        run: ls -la
+        
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
           
       - name: Install dependencies
-        run: npm ci
+        run: |
+          echo "Contenu du package.json avant installation:"
+          cat package.json || echo "package.json non trouvé"
+          npm install
+          echo "Dépendances installées:"
+          ls -la node_modules || echo "Dossier node_modules non trouvé"
         
       - name: Build
-        run: npm run build
+        run: |
+          echo "Exécution de la commande build"
+          npm run build || echo "Erreur dans la commande de build"
+          echo "Contenu après build:"
+          ls -la
+        
+      - name: Check build output
+        run: |
+          echo "Vérification du dossier dist:"
+          ls -la dist || echo "Dossier dist non trouvé"
+          echo "Contenu de index.html (si existe):"
+          cat dist/index.html || echo "index.html non trouvé dans dist"
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
-      # Nous n'utilisons plus qu'une seule action de téléchargement d'artefact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'  # Ajustez ce chemin selon votre projet
+          path: './dist'  # Ajustez si nécessaire
 
   deploy:
     environment:
