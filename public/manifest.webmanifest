@@ -1,0 +1,20 @@
+{
+    "short_name": "IM",
+    "name": "IM Horaire - By Daniel Vale",
+    "icons": [
+      {
+        "src": "heig-vd.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "any"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#ff4f4f",
+    "description": "Application d'horaires pour HEIG-VD",
+    "orientation": "any",
+    "lang": "fr-FR"
+  }
