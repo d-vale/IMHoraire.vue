@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 
 export default defineConfig({
+  base: '/IMHoraire.vue/',
   plugins: [
     vue({
       template: { transformAssetUrls }
